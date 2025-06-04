@@ -14,12 +14,20 @@ import KnowledgeDrawer from './components/KnowledgeDrawer.vue'
 // 抽屉状态管理
 const isDrawerVisible = ref(false)
 
+// Tab状态管理
+const activeTab = ref('intro')
+
 const openDrawer = () => {
   isDrawerVisible.value = true
 }
 
 const closeDrawer = () => {
   isDrawerVisible.value = false
+}
+
+// Tab切换处理
+const handleTabChange = (tab) => {
+  activeTab.value = tab
 }
 
 // 键盘事件处理 - ESC键关闭抽屉
@@ -46,15 +54,20 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Header @open-drawer="openDrawer" />
+  <Header 
+    @open-drawer="openDrawer" 
+    @tab-change="handleTabChange"
+    :active-tab="activeTab"
+  />
   <Banner />
   <main>
-    <AiIntro />
-    <TimelineOverview />
-    <Milestones />
-    <KeyFigures />
-    <FutureOutlook />
-    <References />
+    <!-- 根据activeTab显示对应的组件 -->
+    <AiIntro v-if="activeTab === 'intro'" />
+    <TimelineOverview v-if="activeTab === 'timeline'" />
+    <Milestones v-if="activeTab === 'milestones'" />
+    <KeyFigures v-if="activeTab === 'people'" />
+    <FutureOutlook v-if="activeTab === 'future'" />
+    <References v-if="activeTab === 'references'" />
   </main>
   <FooterComp />
   
@@ -68,5 +81,6 @@ onBeforeUnmount(() => {
 <style scoped>
 main {
   margin: 0 auto;
+  min-height: 60vh; /* 确保主要内容区域有最小高度 */
 }
 </style>

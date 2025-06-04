@@ -200,7 +200,6 @@ const knowledgeEntities = [
   position: fixed;
   top: 0;
   right: 0;
-  width: 600px;
   height: 100%;
   background: white;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);

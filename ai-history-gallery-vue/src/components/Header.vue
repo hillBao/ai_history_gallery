@@ -6,24 +6,83 @@
     </button>
     <nav>
       <ul class="nav">
-        <li><a href="#intro">AI简介</a></li>
-        <li><a href="#timeline">时间轴</a></li>
-        <li><a href="#milestones">里程碑</a></li>
-        <li><a href="#people">人物机构</a></li>
-        <li><a href="#future">未来展望</a></li>
-        <li><a href="#references">参考资料</a></li>
+        <li>
+          <button 
+            class="nav-btn" 
+            :class="{ active: activeTab === 'intro' }"
+            @click="changeTab('intro')"
+          >
+            AI简介
+          </button>
+        </li>
+        <li>
+          <button 
+            class="nav-btn" 
+            :class="{ active: activeTab === 'timeline' }"
+            @click="changeTab('timeline')"
+          >
+            时间轴
+          </button>
+        </li>
+        <li>
+          <button 
+            class="nav-btn" 
+            :class="{ active: activeTab === 'milestones' }"
+            @click="changeTab('milestones')"
+          >
+            里程碑
+          </button>
+        </li>
+        <li>
+          <button 
+            class="nav-btn" 
+            :class="{ active: activeTab === 'people' }"
+            @click="changeTab('people')"
+          >
+            人物机构
+          </button>
+        </li>
+        <li>
+          <button 
+            class="nav-btn" 
+            :class="{ active: activeTab === 'future' }"
+            @click="changeTab('future')"
+          >
+            未来展望
+          </button>
+        </li>
+        <li>
+          <button 
+            class="nav-btn" 
+            :class="{ active: activeTab === 'references' }"
+            @click="changeTab('references')"
+          >
+            参考资料
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script setup>
-import { defineEmits } from 'vue'
+import { defineEmits, defineProps } from 'vue'
 
-const emit = defineEmits(['open-drawer'])
+const props = defineProps({
+  activeTab: {
+    type: String,
+    default: 'intro'
+  }
+})
+
+const emit = defineEmits(['open-drawer', 'tab-change'])
 
 const openDrawer = () => {
   emit('open-drawer')
+}
+
+const changeTab = (tab) => {
+  emit('tab-change', tab)
 }
 </script>
 
@@ -80,16 +139,27 @@ const openDrawer = () => {
   margin: 0;
 }
 
-.nav a {
+.nav-btn {
+  background: none;
+  border: none;
   color: inherit;
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
 }
 
-.nav a:hover {
+.nav-btn:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: bold;
+  color: #00d4ff;
 }
 
 @media (max-width: 768px) {
@@ -106,7 +176,7 @@ const openDrawer = () => {
     gap: 0.5rem;
   }
   
-  .nav a {
+  .nav-btn {
     font-size: 0.9rem;
     padding: 6px 12px;
   }
