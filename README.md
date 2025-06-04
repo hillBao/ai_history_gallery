@@ -168,6 +168,14 @@ npm run preview
 - **样式方案**：CSS3 + 预处理器
 - **图表库**：Chart.js / D3.js（可选）
 - **动画库**：GSAP / Lottie（可选）
+## 📁 组件结构
+
+项目使用 Vue 3 的单文件组件，每个主要模块对应一个组件：
+
+- `Header` 顶部导航
+- `Banner` 主视觉区域
+- `modules/*` 功能模块组件
+- `Footer` 底部信息
 
 ## 📄 许可证
 
